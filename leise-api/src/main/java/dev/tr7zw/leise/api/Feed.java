@@ -38,7 +38,9 @@ public class Feed {
                     .attr("href", ent.getUrl().replace("http://heise.de/-", "/article/"));
             Element figure = link.appendElement("figure").classNames(new HashSet<>(Arrays.asList("mb-4", "md:mb-0",
                     "md:mr-4", "md:w-2/5", "float-right", "w-[28%]", "ml-4", "md:float-none", "md:ml-0")));
-            figure.appendElement("img").attr("src", urlRemap.apply(ent.getPreviewImage()));
+            if(ent.getPreviewImage() != null) {
+                figure.appendElement("img").attr("src", urlRemap.apply(ent.getPreviewImage()));
+            }
             Element content = link.appendElement("div").classNames(Collections.singleton("md:w-3/5"));
             content.appendElement("header").appendElement("h3")
                     .classNames(new HashSet<>(Arrays.asList("flex", "flex-col"))).appendElement("span")

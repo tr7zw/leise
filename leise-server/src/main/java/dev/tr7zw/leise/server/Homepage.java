@@ -17,20 +17,34 @@ import dev.tr7zw.leise.api.UrlUtil;
 
 @Singleton
 @Path("/")
-public class NewsTest {
+public class Homepage {
 
     private final FeedAPI feedAPI = new FeedAPI();
     private final Function<String, String> imageRemapper;
     
     @Inject
-    public NewsTest(ImageProxy proxy) {
+    public Homepage(ImageProxy proxy) {
         imageRemapper = proxy::registerImage;
     }
     
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public Response getStats() throws Exception {
+    public Response getHomepage() throws Exception {
+        return Response.ok(feedAPI.getFeed("https://www.heise.de/rss/heise.rdf").getOverview(imageRemapper)).build();
+    }
+    
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    @Path("/developer")
+    public Response getDeveloper() throws Exception {
         return Response.ok(feedAPI.getFeed("https://www.heise.de/developer/rss/news-atom.xml").getOverview(imageRemapper)).build();
+    }
+    
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    @Path("/security")
+    public Response getSecurity() throws Exception {
+        return Response.ok(feedAPI.getFeed("https://www.heise.de/security/rss/news.rdf").getOverview(imageRemapper)).build();
     }
     
 }
