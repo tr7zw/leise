@@ -8,7 +8,7 @@ import dev.tr7zw.leise.api.Feed;
 import dev.tr7zw.leise.api.FeedAPI;
 
 @Singleton
-@Path("/stats")
+@Path("/feed")
 public class FeedTest {
 
     @GET
