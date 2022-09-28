@@ -28,13 +28,16 @@ public class ArticleAPI {
         filterByClass(report, "a-article-action--pocket");
         filterByClass(report, "opt-in__content-container");
         filterByClass(report, "comment-button");
+        filterByClass(report, "stage-card");
         filterByAttributeValue(report, "name", "meldung.ho.bottom.zurstartseite");
         filterByAttributeValue(report, "name", "meldung.ho.header.kommentarelesen");
+        filterByAttributeValue(report, "name", "meldung.ct.header.kommentarelesen");
         filterByAttributeValue(report, "name", "meldung.ho.header.drucken");
         filterByAttributeValue(report, "data-component", "RecommendationBox");
         filterByAttributeValueStarting(report, "src", "data:image/svg+xml");
         filterByTag(report, "svg");
         filterByTag(report, "noscript");
+        filterByTag(report, "a-paid-content-teaser");
         report.getElementsByTag("a-img").forEach(img -> img.tagName("img"));
         remapImages(report, "src");
         remapImages(report, "href");
@@ -73,11 +76,11 @@ public class ArticleAPI {
         for(int i = 0; i < parts.length; i++) {
             String s = parts[i];
             System.out.println(s);
-            if(s.startsWith("https://") && s.endsWith(".png")) {
+            if(s.startsWith("https://") && (s.contains(".png") || s.contains(".jpeg"))) {
                 parts[i] = urlRemap.apply(s);
                 continue;
             }
-            if(s.startsWith("/") && s.endsWith(".png")) {
+            if(s.startsWith("/") && (s.contains(".png") || s.contains(".jpeg"))) {
                 parts[i] = urlRemap.apply("https://www.heise.de" + s);
             }
         }
