@@ -1,4 +1,6 @@
-# leise Project
+# Leise Project
+
+Alternative self-hosted Heise.de frontend.
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
@@ -46,7 +48,3 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 You can then execute your native executable with: `./target/leise-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
-
-## Related Guides
-
-- Reactive Routes ([guide](https://quarkus.io/guides/reactive-routes)): REST framework offering the route model to define non blocking endpoints
