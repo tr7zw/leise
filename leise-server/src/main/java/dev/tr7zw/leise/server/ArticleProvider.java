@@ -57,4 +57,11 @@ public class ArticleProvider {
         return getContent(id);
     }
     
+    @Path("/hintergrund/{id}")
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public Response getHintergrund(@PathParam("id") String id) throws IOException {
+        return getContent(id);
+    }
+    
 }

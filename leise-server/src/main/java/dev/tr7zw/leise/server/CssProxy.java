@@ -11,16 +11,12 @@ import java.util.stream.Collectors;
 
 import javax.inject.Singleton;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import org.jboss.resteasy.reactive.ResponseHeader;
-
 import io.quarkus.cache.CacheResult;
-import io.quarkus.vertx.web.Header;
 
 @Singleton
 @Path("/css/{id}")
@@ -36,7 +32,6 @@ public class CssProxy {
     @GET
     @Produces("text/css")
     @CacheResult(cacheName = "css-cache")
-    @ResponseHeader(name = "cache-control", value = "public, max-age=31536000")
     public Response getCss(@PathParam("id") String id) throws IOException {
         URL url = mappedImages.get(id);
         if (url == null) {
