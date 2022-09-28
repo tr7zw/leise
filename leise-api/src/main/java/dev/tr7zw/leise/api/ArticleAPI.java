@@ -23,8 +23,7 @@ public class ArticleAPI {
             doc = Jsoup.connect(doc.baseUri() + extras).followRedirects(true).get();
         }
         Element report = doc.getElementById("meldung");
-        report.appendElement("link").attr("rel", "stylesheet").attr("href", "/css/index");
-        report.appendElement("link").attr("rel", "stylesheet").attr("href", "/css/ho");
+
         filterByClass(report, "article-layout__header-wrbng");
         filterByClass(report, "article-sidebar");
         filterByClass(report, "a-ad");
@@ -48,6 +47,8 @@ public class ArticleAPI {
         Element output = new Element(Tag.valueOf("div"), "");
         output.classNames(Collections.singleton("a-layout"));
         output.attr("style", "max-width:42rem");
+        output.appendElement("link").attr("rel", "stylesheet").attr("href", "/css/index");
+        output.appendElement("link").attr("rel", "stylesheet").attr("href", "/css/ho");
         output.appendChild(report);
         return output.outerHtml();
     }

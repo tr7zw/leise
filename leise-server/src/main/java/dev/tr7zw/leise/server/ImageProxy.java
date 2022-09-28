@@ -28,7 +28,7 @@ public class ImageProxy {
         if(url == null) {
             return Response.status(404).build();
         }
-        return Response.ok(url.openStream()).build();
+        return Response.ok(url.openStream()).header("cache-control", "public, max-age=31536000").build();
     }
     
     public String registerImage(String url) {
