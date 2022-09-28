@@ -17,8 +17,11 @@ public class ArticleAPI {
         this.urlRemap = urlRemap;
     }
     
-    public String getArticle(int id) throws IOException {
-        Document doc = Jsoup.connect("https://www.heise.de/-" + id + "?seite=all").followRedirects(true).get();
+    public String getArticle(int id, String extras) throws IOException {
+        Document doc = Jsoup.connect("https://www.heise.de/-" + id).followRedirects(true).get();
+        if(extras != null) {
+            doc = Jsoup.connect(doc.baseUri() + extras).followRedirects(true).get();
+        }
         Element report = doc.getElementById("meldung");
         report.appendElement("link").attr("rel", "stylesheet").attr("href", "/css/index");
         report.appendElement("link").attr("rel", "stylesheet").attr("href", "/css/ho");
@@ -75,7 +78,6 @@ public class ArticleAPI {
         String[] parts = str.split(" ");
         for(int i = 0; i < parts.length; i++) {
             String s = parts[i];
-            System.out.println(s);
             if(s.startsWith("https://") && (s.contains(".png") || s.contains(".jpeg"))) {
                 parts[i] = urlRemap.apply(s);
                 continue;
